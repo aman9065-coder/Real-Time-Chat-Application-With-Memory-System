@@ -11,6 +11,36 @@ router.post('/',authUser,createChat)
 
 router.get('/',authUser,getChat)
 
+router.delete('/:id', authUser, async (req, res) => {
+  // delegate to controller's deleteChat for consistency
+  const { deleteChat } = require('../controllers/chat.controller');
+  return deleteChat(req, res);
+});
+
+// GET /api/chat/:chatId - return chat details (title, lastActivity)
+router.get("/:chatId", authUser, async (req, res) => {
+  try {
+    const chat = await Chatmodel.findOne({
+      _id: req.params.chatId,
+      user: req.user._id,
+    });
+
+    if (!chat) {
+      return res.status(404).json({ message: "Chat not found" });
+    }
+
+    return res.status(200).json({
+      _id: chat._id,
+      title: chat.title,
+      lastActivity: chat.lastActivity,
+      user: chat.user,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
+});
+
 // GET /api/chat/:chatId/messages
 router.get("/:chatId/messages", authUser, async (req, res) => {
   // const messages = await messageModel

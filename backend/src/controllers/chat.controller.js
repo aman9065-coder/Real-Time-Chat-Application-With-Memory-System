@@ -1,4 +1,5 @@
 const Chatmodel = require("../models/chat.model");
+const messageModel = require('../models/message.model');
 
 async function createChat(req,res){
     const {title}=req.body;
@@ -34,6 +35,25 @@ async function getChat(req,res){
         chat:chat
     })
 }
+
+async function deleteChat(req, res) {
+  const user = req.user;
+  const chatId = req.params.id;
+
+  const chat = await Chatmodel.findOne({ _id: chatId, user: user._id });
+  if (!chat) {
+    return res.status(404).json({ message: 'Chat not found' });
+  }
+
+  // remove messages belonging to this chat
+  await messageModel.deleteMany({ chat: chat._id });
+
+  // remove the chat
+  await Chatmodel.deleteOne({ _id: chat._id });
+
+  return res.status(200).json({ message: 'Chat deleted' });
+}
+
 module.exports={
-    createChat,getChat
+    createChat,getChat, deleteChat
 };

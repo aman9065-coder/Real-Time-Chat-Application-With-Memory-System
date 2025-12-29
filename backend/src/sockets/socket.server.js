@@ -168,7 +168,7 @@ socket.on("leave-chat", ({ chatId }) => {
   socket.on("ai-message", async (message) => {
 
     // USER MESSAGE SAVE
-    await messageModel.create({
+    const question = await messageModel.create({
       chat: message.chat_id,
       user: socket.user._id,
       content: message.content,
@@ -187,6 +187,20 @@ socket.on("leave-chat", ({ chatId }) => {
 
     // LTM
     const vectors = await generateVector(message.content);
+
+    // create memory in vector DB (pinepone)
+
+    await createMemory({
+        vectors:vectors,
+        messageId:question._id,
+        metadata:{
+          chat:message.chat_id,
+          user:socket.user._id,
+          text:message.content
+        }
+      })
+
+      // query of vector memory
     const memory = await queryMemory({
       queryVector: vectors,
       limits: 3,

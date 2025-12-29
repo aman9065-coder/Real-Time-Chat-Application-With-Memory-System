@@ -43,7 +43,7 @@ const Register = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full max-w-sm mx-auto mt-10 p-6 rounded-2xl shadow-lg flex flex-col gap-4"
+      className="w-full max-w-sm mx-auto mt-12 p-6 rounded-2xl shadow-lg bg-[#0f1724] text-gray-100 flex flex-col gap-4"
     >
 
       <h2 className="text-2xl font-semibold text-center text-white">
@@ -61,7 +61,7 @@ const Register = () => {
             message: "Minimum 3 characters"
           }
         })}
-        className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full px-4 py-2 bg-[#0b1220] border border-gray-700 rounded-lg outline-none focus:ring-2 focus:ring-emerald-400 placeholder-gray-400 text-gray-100"
       />
       {errors.firstName && (
         <p className="text-red-500 text-sm">{errors.firstName.message}</p>
@@ -74,7 +74,7 @@ const Register = () => {
         {...register("lastName", {
           required: "Last name is required"
         })}
-        className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-black"
       />
       {errors.lastName && (
         <p className="text-red-500 text-sm">{errors.lastName.message}</p>
@@ -91,7 +91,7 @@ const Register = () => {
             message: "Password must be 6 characters"
           }
         })}
-        className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-black"
       />
       {errors.password && (
         <p className="text-red-500 text-sm">{errors.password.message}</p>
@@ -108,7 +108,7 @@ const Register = () => {
             message: "Invalid email format"
           }
         })}
-        className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-black"
       />
       {errors.email && (
         <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -116,10 +116,14 @@ const Register = () => {
 
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded-lg font-medium hover:bg-blue-600 transition"
+        className="w-full bg-emerald-500 text-black py-2 rounded-lg font-medium hover:opacity-90 transition"
       >
         Register
-      </button>
+      </button> 
+
+      <div className="text-center text-sm text-gray-600">
+        Already have an account? <a href="/login" className="text-white font-medium">Login</a>
+      </div>
 
     </form>
   );

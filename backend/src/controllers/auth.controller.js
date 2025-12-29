@@ -153,4 +153,19 @@ async function loginUser(req, res) {
 
 
 
-module.exports = { registerUser, loginUser };
+async function logoutUser(req, res) {
+  // Clear the token cookie set on login/register
+  res.clearCookie('token');
+  return res.status(200).json({ message: 'Logout successful' });
+}
+
+async function meUser(req, res) {
+  // authUser middleware attaches user to req
+  if (!req.user) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+  const { _id, email, fullName } = req.user;
+  return res.status(200).json({ user: { _id, email, fullName } });
+}
+
+module.exports = { registerUser, loginUser, logoutUser, meUser }; 
