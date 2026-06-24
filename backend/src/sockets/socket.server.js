@@ -17,13 +17,22 @@ const { createMemory, queryMemory } = require("../services/vector.service");
 // SOCKET SERVER INITIALIZATION
 // ========================================================
 
+
 function initSocketServer(httpServer) {
+  // const io = new Server(httpServer, {
+  //   cors: {
+  //     origin: "http://localhost:5173",
+  //     credentials: true,
+  //   },
+  // });
+
   const io = new Server(httpServer, {
-    cors: {
-      origin: "http://localhost:5173",
-      credentials: true,
-    },
-  });
+        cors: {
+            origin: process.env.FRONTEND_URL,
+            credentials: true,
+        }
+    });
+
 
   // ========================================================
   // SOCKET AUTHENTICATION MIDDLEWARE
