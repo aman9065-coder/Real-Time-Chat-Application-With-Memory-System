@@ -55,7 +55,7 @@ const ChatPage = () => {
      1️⃣ CREATE SOCKET (ONLY ONCE)
      ====================================================== */
   useEffect(() => {
-    const socketInstance = io("http://localhost:3000", {
+    const socketInstance = io("https://real-time-chat-application-with-memory-bt70.onrender.com", {
       withCredentials: true,
     });
 
