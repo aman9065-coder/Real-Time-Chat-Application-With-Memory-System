@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import Register from '../pages/register'
+import Register from '../pages/Register'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import ChatPage from '../components/ChatPage'
