@@ -175,7 +175,7 @@ const ChatPage = () => {
         )}
 
         {messages.map((msg, index) => (
-          <div key={msg._id || index} className={`w-full sm:max-w-[70%] text-sm ${msg.role === 'user' ? 'ml-auto bg-emerald-500 text-black' : 'mr-auto bg-[#0b1220] text-gray-100 border border-gray-700'} rounded-lg px-4 py-2`}> 
+          <div key={msg._id || index} className={`w-[75%] sm:max-w-[70%] text-sm ${msg.role === 'user' ? 'ml-auto bg-emerald-500 text-black' : 'mr-auto bg-[#0b1220] text-gray-100 border border-gray-700'} rounded-lg px-4 py-2`}> 
             <div>{msg.content}</div>
             <div className="text-xs text-shadow-gray-400 mt-1">{msg.createdAt ? new Date(msg.createdAt).toLocaleTimeString() : ''}</div>
           </div>
